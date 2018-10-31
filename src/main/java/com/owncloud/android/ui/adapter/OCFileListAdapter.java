@@ -957,6 +957,7 @@ public class OCFileListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         private OCFileListGridImageViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            favorite.getDrawable().mutate();
         }
     }
 
