@@ -27,6 +27,7 @@ import android.os.PowerManager;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.nextcloud.client.preferences.AppPreferences;
 import com.nextcloud.client.preferences.PreferenceManager;
 import com.owncloud.android.MainApp;
 import com.owncloud.android.ui.activity.PassCodeActivity;
@@ -78,7 +79,8 @@ public final class PassCodeManager {
     }
 
     public void onActivityStarted(Activity activity) {
-        Long timestamp = PreferenceManager.getLockTimestamp(activity);
+        AppPreferences preferences = PreferenceManager.fromContext(activity);
+        Long timestamp = preferences.getLockTimestamp();
         if (!exemptOfPasscodeActivities.contains(activity.getClass()) && passCodeShouldBeRequested(timestamp)) {
 
             Intent i = new Intent(MainApp.getAppContext(), PassCodeActivity.class);
@@ -110,7 +112,8 @@ public final class PassCodeManager {
     }
 
     private void setUnlockTimestamp(Activity activity) {
-        PreferenceManager.setLockTimestamp(activity, System.currentTimeMillis());
+        AppPreferences preferences = PreferenceManager.fromContext(activity);
+        preferences.setLockTimestamp(System.currentTimeMillis());
     }
 
     private boolean passCodeShouldBeRequested(Long timestamp) {
