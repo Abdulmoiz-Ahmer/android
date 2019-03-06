@@ -86,6 +86,37 @@ public interface AppPreferences {
      */
     void setLastUploadPath(String path);
 
+    /**
+     * Gets the auto upload paths flag last set.
+     *
+     * @return ascending order     the legacy cleaning flag, default is false
+     */
+    boolean getAutoUploadPathsUpdate();
+
+    /**
+     * Saves the legacy cleaning flag which the user has set last.
+     *
+     * @param pathUpdate flag if it is a auto upload path update
+     */
+    void setAutoUploadPathsUpdate(boolean pathUpdate);
+
+    /**
+     * Gets the auto upload split out flag last set.
+     *
+     * @return ascending order     the legacy cleaning flag, default is false
+     */
+    boolean getAutoUploadSplitEntries();
+
+    /**
+     * Saves the flag for split entries magic
+     *
+     * @param splitOut flag if it is a auto upload path update
+     */
+    void setAutoUploadSplitEntries(boolean splitOut);
+
+    boolean getAutoUploadInit();
+    void setAutoUploadInit(boolean autoUploadInit);
+
     boolean isShowDetailedTimestampEnabled();
     void setShowDetailedTimestampEnabled(boolean showDetailedTimestamp);
 
