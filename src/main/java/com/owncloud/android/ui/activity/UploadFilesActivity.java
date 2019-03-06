@@ -42,6 +42,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.android.material.button.MaterialButton;
+import com.nextcloud.client.preferences.AppPreferences;
 import com.owncloud.android.R;
 import com.nextcloud.client.preferences.PreferenceManager;
 import com.owncloud.android.files.services.FileUploader;
@@ -117,6 +118,8 @@ public class UploadFilesActivity extends FileActivity implements
     private static final String WAIT_DIALOG_TAG = "WAIT";
     private static final String QUERY_TO_MOVE_DIALOG_TAG = "QUERY_TO_MOVE";
     public static final String REQUEST_CODE_KEY = "requestCode";
+
+    private AppPreferences preferences;
     private int requestCode;
     private LocalStoragePathPickerDialogFragment dialog;
 
@@ -124,6 +127,7 @@ public class UploadFilesActivity extends FileActivity implements
     public void onCreate(Bundle savedInstanceState) {
         Log_OC.d(TAG, "onCreate() start");
         super.onCreate(savedInstanceState);
+        preferences = PreferenceManager.fromContext(this);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -296,7 +300,7 @@ public class UploadFilesActivity extends FileActivity implements
                 ft.addToBackStack(null);
 
                 SortingOrderDialogFragment mSortingOrderDialogFragment = SortingOrderDialogFragment.newInstance(
-                    PreferenceManager.getSortOrderByType(this, FileSortOrder.Type.uploadFilesView));
+                    preferences.getSortOrderByType(FileSortOrder.Type.uploadFilesView));
                 mSortingOrderDialogFragment.show(ft, SORT_ORDER_DIALOG_TAG);
 
                 break;
